@@ -1,4 +1,4 @@
-package AopBproblim;
+package com.sdu.acm.AopBproblim;
 
 /*
  相信大家早已不屑于做A + B Problem这样的简单题了，那么现在让大家算A op B，其中op可能是加法，减法或者乘法。

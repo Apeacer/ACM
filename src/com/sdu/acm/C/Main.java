@@ -1,4 +1,4 @@
-package C;
+package com.sdu.acm.C;
 
 /*
  * 一般地，在ACM比赛中，题目的难度和题目的文字量是成反比的。

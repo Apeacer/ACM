@@ -1,4 +1,4 @@
-package B;
+package com.sdu.acm.B;
 
 /*
  * 

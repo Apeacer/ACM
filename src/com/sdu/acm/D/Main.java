@@ -1,4 +1,4 @@
-package D;
+package com.sdu.acm.D;
 
 /*
  * 柯景腾目光呆滞，直直地盯着沈佳宜，任凭数学老师在讲台上唾沫横飞。

@@ -1,4 +1,4 @@
-package AopBproblim;
+package com.sdu.acm.AopBproblim;
 
 import java.util.*;
 public class test {

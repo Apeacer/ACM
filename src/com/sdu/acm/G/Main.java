@@ -1,4 +1,4 @@
-package G;
+package com.sdu.acm.G;
 
 /*
  * 提问：求x^y的各位数字和的各位数字和的各位数字和的各位数字和。
