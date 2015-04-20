@@ -1,4 +1,4 @@
-package com.poj.id1001.copy;
+package com.poj.id1001;
 
 //Description
 //
