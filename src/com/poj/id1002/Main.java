@@ -1,7 +1,5 @@
 package com.poj.id1002;
 
-import java.util.Scanner;
-
 /*
 Description
 
@@ -53,52 +51,221 @@ Sample Output
  * */
 
 
-public class Main 
-{
 
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+
+public class Main
+{
 	static Scanner scanner = new Scanner(System.in);
 	
 	public static void main(String[] args) 
 	{
-		int n=scanner.nextInt();
+		int n=scanner.nextInt();//n组数据
+		Map<String, Integer> numbers=new HashMap<String, Integer>();
 		
-		while(n-->0)
+		while(n-->0)//处理n组数据
 		{
-			String number=scanner.next();
+			String goodNumber=scanner.next();//得到输入
+			String oldNumber=clearNumber(goodNumber);//净化好记的号码变成标准的号码
 			
-			String number_before=doPure(number);
-			System.out.println(number_before);
+			//计数
+			if(numbers.containsKey(oldNumber))//有了就加1
+			{
+				numbers.put(oldNumber, numbers.get(oldNumber)+1);
+			}
+			else //没有就加入
+			{
+				numbers.put(oldNumber, 1);
+			}	
 		}
-	}
+		//显示出
+		boolean flag = false;//是否有重复标记  
 	
-	//净化号码
-	static String doPure(String number)
-	{
-		number=number.replace("-", "");
-	
-		number=Replace(number, "2", "A", "B", "C");
-		number=Replace(number, "3", "D", "E", "F");
-		number=Replace(number, "4", "G", "H", "I");
-		number=Replace(number, "5", "J", "K", "L");
-		number=Replace(number, "6", "M", "N", "O");
-		number=Replace(number, "7", "P", "R", "S");
-		number=Replace(number, "8", "T", "U", "V");
-		number=Replace(number, "9", "W", "X", "Y");
+		Object[] keys=numbers.keySet().toArray();
+		Arrays.sort(keys);//排序key值
 		
-		number=number.substring(0,3)+"-"+number.substring(3,number.length());
-		
-		return number;
-	}
-	
-	//替换字符
-	static String Replace(String Old,String New,String re1,String re2,String re3)
-	{
-		
-		Old=Old.replace(re1, New);
-		Old=Old.replace(re2, New);
-		Old=Old.replace(re3, New);
-		
-		return Old;
-	}
+		//遍历并显示重复的
+		for(int i=0;i<keys.length;i++)
+		{
+			if(numbers.get(keys[i])>1)
+			{
+				flag=true;//有重复
+				//打印
+				System.out.println(keys[i].toString()+" "+numbers.get(keys[i]));
+			}
+		}  
+		//无重复现象
+		if (!flag)
+		{  
+			System.out.println("No duplicates. ");  
+		}  
 
+	}
+	//处理好记的号码-------------------------------------------------------------------------
+	static String clearNumber(String goodNumber)
+	{
+		StringBuilder oldNumberBuild = new StringBuilder();//之前号码的容器
+		String oldNumber="";//之前号码
+		
+		goodNumber=goodNumber.replace("-", "");//去掉“-”
+		
+		for(int i=0;i<goodNumber.length();i++)//遍历去掉字母
+		{
+			oldNumberBuild.append(replace(goodNumber.charAt(i)));//替换字母
+		}
+		
+		oldNumber=oldNumberBuild.toString().substring(0,3)+"-"+oldNumberBuild.toString().substring(3);//最后加上“-”
+		return oldNumber;
+	}
+	
+	
+	//替换字母的方法-------------------------------------------------------------------------
+	static char replace(char ch)
+	{
+		if(ch=='A' || ch=='B' || ch=='C')
+		{
+			return '2';
+		}
+		if(ch=='D' || ch=='E' || ch=='F')
+		{
+			return '3';
+		}
+		if(ch=='G' || ch=='H' || ch=='I')
+		{
+			return '4';
+		}
+		if(ch=='J' || ch=='K' || ch=='L')
+		{
+			return '5';
+		}
+		if(ch=='M' || ch=='N' || ch=='O')
+		{
+			return '6';
+		}
+		if(ch=='P' || ch=='R' || ch=='S')
+		{
+			return '7';
+		}
+		if(ch=='T' || ch=='U' || ch=='V')
+		{
+			return '8';
+		}
+		if(ch=='W' || ch=='X' || ch=='Y')
+		{
+			return '9';
+		}
+		return ch;//无匹配是数字
+	}
 }
+
+
+
+////TimeLimiteOut String 是不可变对象，少用String类的方法
+//public class Main 
+//{
+//
+//	static Scanner scanner = new Scanner(System.in);
+//	
+//	public static void main(String[] args) 
+//	{
+//		int n=scanner.nextInt();
+//		
+//		Map<String ,Integer> numbers=new HashMap<String ,Integer>();
+//		
+//		while(n-->0)
+//		{
+//			String number=scanner.next();
+//			
+//			String number_before=doPure(number);
+//			
+//			if(numbers.containsKey(number_before))
+//			{
+//				numbers.put(number_before, numbers.get(number_before)+1);
+//			}
+//			else 
+//			{
+//				numbers.put(number_before, 1);
+//			}
+//		}
+//		
+////		Iterator iterator=numbers.entrySet().iterator();
+////		while(iterator.hasNext())
+////		{
+////			Map.Entry entry = (Map.Entry) iterator.next();
+////			Object val = entry.getValue();
+////			if(Integer.parseInt(val.toString())<2)
+////				numbers.remove(entry.getKey());	
+////		}
+//		
+//		Object[] keys=numbers.keySet().toArray();
+//		Arrays.sort(keys);
+//		
+//		//遍历并显示
+//		for(int i=0;i<keys.length;i++)
+//		{
+////			if(numbers.get(keys[i])>1)
+//				System.out.println(keys[i].toString()+" "+numbers.get(keys[i]));
+//		}
+//		
+//		
+//	}
+//	
+//	//净化号码
+//	static String doPure(String number)
+//	{
+//		number=number.replace("-", "");
+//	
+//		number=Replace(number, "2", "A", "B", "C");
+//		number=Replace(number, "3", "D", "E", "F");
+//		number=Replace(number, "4", "G", "H", "I");
+//		number=Replace(number, "5", "J", "K", "L");
+//		number=Replace(number, "6", "M", "N", "O");
+//		number=Replace(number, "7", "P", "R", "S");
+//		number=Replace(number, "8", "T", "U", "V");
+//		number=Replace(number, "9", "W", "X", "Y");
+//		
+//		number=number.substring(0,3)+"-"+number.substring(3,number.length());
+//		
+//		return number;
+//	}
+//	
+//	//替换字符
+//	static String Replace(String Old,String New,String re1,String re2,String re3)
+//	{
+//		
+//		Old=Old.replace(re1, New);
+//		Old=Old.replace(re2, New);
+//		Old=Old.replace(re3, New);
+//		
+//		return Old;
+//	}
+//
+//}
+
+
+
+
+
+
+/*
+ 
+ 12
+4873279
+ITS-EASY
+888-4567
+3-10-10-10
+888-GLOP
+TUT-GLOP
+967-11-11
+310-GINO
+F101010
+888-1200
+-4-8-7-3-2-7-9-
+487-3279
+ 
+ */
