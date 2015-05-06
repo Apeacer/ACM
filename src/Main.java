@@ -13,6 +13,11 @@ public class Main {
 		
 		int b=5000*365;
 		System.out.println(b);
+		
+		String count="1";
+		char one='9';
+		char two='2';
+		System.out.println(one+two);
 	}
 
 }

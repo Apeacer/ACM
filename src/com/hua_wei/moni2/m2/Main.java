@@ -1,7 +1,4 @@
-package com.hua_wei.moni2;
-
-import java.util.ArrayList;
-import java.util.Scanner;
+package com.hua_wei.moni2.m2;
 
 //
 //给出一个整数（负数使用其绝对值），输出这个整数中的两种递减数（1.最大递减数；2.递减数中各位数之和最大的数）之和。
@@ -13,6 +10,11 @@ import java.util.Scanner;
 //各位数字之和最大的递减数: 如75345323中的各递减数：75各位数之和=12(7+5=12),753各位数之和=15(7+5+3=15),53各位数之和=8(5+3=8),532各位数之和=10(5+3+2=10),32各位数之和=5(3+2=5)。那么各位数字之和最大的递减数为753。
 //
 //输出结果=最大递减数+各位数之和最大的递减数。(1506=753+753)
+
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Main 
 {
     
@@ -24,66 +26,79 @@ public class Main
 
     	String numString=num+"";
   	
-//    	char nums[]=numString.toCharArray();
+    	char nums[]=numString.toCharArray();
     	
     	ArrayList<Integer> result =new ArrayList<Integer>();
     	
     	int low=0,height=0;
     	
-    	for(int i=0; i<numString.length()-1;i++)
-    	{
-    		height=i+2;
-    		if(Integer.parseInt(numString.substring(i, i+1))>Integer.parseInt(numString.substring(i+1, i+2)))
+    	for(int i=0; i<nums.length-1;i++)
+    	{  		
+    		height=i+1;
+    		if(nums[i]>nums[i+1])//前一个数大于后一个数
     		{
-    			result.add(Integer.parseInt(numString.substring(low, height)));
+    			int res=0;
+    			int start=low;
+    			for(int j=height;j>=low;j--)
+    			{
+    				res+=((int)nums[start]-48)*(int)Math.pow(10, j-low);
+//System.out.println("z"+j+" "+low+" "+height+" "+res);
+    				start++;
+    			}
+    			result.add(res);
     		}
     		else 
     		{
 				low=i+1;
 			}
+    		
     	}
+//for(int numtemp:result)
+//{
+//   System.out.print(numtemp+" ");
+//}System.out.println();
     	
-    	int max=0;
-    	ArrayList<Integer> resultADD=new ArrayList<Integer>();
-    	int maxadd=0;
+    	int max_one=0;//最大递减数
+    	int max_two=0;//最大个位数和递减数
+    	int max_two_add=0;//最大个位数和
     	
     	if(result.isEmpty())
-    		{
-    			System.out.println("0");
-    		}
+    	{
+    		System.out.println("0");
+    	}
     	else 
     	{
 			
-//System.out.print("递减集合：");
     		for(int a: result)
     		{ 
-//System.out.print(a+" ");
-    			if(a>max)
-    			{max=a;}
-    			
-    			
-    			String temp=a+"";
-    			int add=0;
-    			for(int i=0;i<temp.length();i++)
+    			//找最大递减数-------------------
+    			if(a>max_one)
     			{
-    				add+=Integer.parseInt(temp.substring(i,i+1));
+    				max_one=a;
     			}
     			
-    			resultADD.add(add);	
+    			//找各位数之和最大递减数------------
+    			int temp=a;//当前数
+    			int a_add=0;//当前数各位和
+    			while(true)//求各位数之和
+    			{
+    				a_add+=temp%10;
+    				temp/=10;
+    				if(temp==0)
+    					break;
+    			}
+//System.out.print("add："+a_add+" " );
+    			if(a_add>max_two_add)//当前的大
+    			{
+    				max_two_add=a_add;
+    				max_two=a;
+    			}
     			
     		}
-    		
-    		for (int b : resultADD) 
-    		{
-    			if(b>maxadd)
-    			{
-    				maxadd=b;
-    			}
-    		}
-    		
-//System.out.println();
-//System.out.println(max +" "+maxadd);
-System.out.println(max+result.get(resultADD.indexOf(maxadd)));
+//System.out.println();    		
+//System.out.println(max_one+" "+max_two);
+
+System.out.println(max_one+max_two);
 		}
     }
 }
