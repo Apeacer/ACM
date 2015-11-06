@@ -11,14 +11,7 @@ import java.util.Scanner;
 
 public class Main 
 {
-	public void name() 
-	{
-		int a1=1,a2=2,a3,a4;
-		final int a5=5,a6=6,a7,a8;
-		
-		a7=a1+a2;
-		a3=a2+a6;
-	}
+
 	public static void main(String[] args) 
 	{
 		Scanner scanner = new Scanner(System.in);
@@ -31,6 +24,8 @@ public class Main
 				for(int j=0;j<6;j++)
 					gifts[i][j]=scanner.nextInt();
 			}
+//			test
+//			int gifts1[][]={{1,2,3,4,5,6},{7,8,9,10,11,12},{13,14,15,16,17,18},{19,20,21,22,23,24},{25,26,27,28,29,30},{31,32,33,34,35,36}};
 			
 			List<Integer> results = new ArrayList<Integer>();
 			
@@ -47,26 +42,24 @@ public class Main
 	}
 	
 	static void countr(List<Integer> results,int [][]g,int i,int j ,int perresult)
-	{
-		if(i==5&&j==5)
+	{		
+		if( i == 5 && j == 5 )
 		{
 			results.add(g[5][5]+perresult);
-			System.out.println(g[5][5]+perresult);
 		}
-		if(i==5 && j<5)
+		if( i == 5 && j < 5 )
 		{
 			countr(results, g, i, j+1,g[i][j]+perresult);
 		}
-		if(j == 5 && i<5)
+		if( j == 5 && i < 5 )
 		{
 			countr(results, g, i+1, j,g[i][j]+perresult);
 		}
-		else 
+		if( i < 5 && j < 5 ) 
 		{
 			countr(results, g, i+1, j,g[i][j]+perresult);
 			countr(results, g, i, j+1,g[i][j]+perresult);
 		}
-		
 	}
 
 }
